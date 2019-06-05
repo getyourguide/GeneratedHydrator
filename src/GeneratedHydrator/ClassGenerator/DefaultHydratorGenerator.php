@@ -12,7 +12,6 @@ use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\NodeTraverser;
 use ReflectionClass;
-use Zend\Hydrator\HydratorInterface;
 use function explode;
 
 /**
@@ -40,7 +39,7 @@ class DefaultHydratorGenerator implements HydratorGenerator
 
         $implementor = new NodeTraverser();
         $implementor->addVisitor(new HydratorMethodsVisitor($originalClass));
-        $implementor->addVisitor(new ClassImplementorVisitor($originalClass->getName(), [HydratorInterface::class]));
+        $implementor->addVisitor(new ClassImplementorVisitor($originalClass->getName(), []));
 
         return $implementor->traverse($ast);
     }
