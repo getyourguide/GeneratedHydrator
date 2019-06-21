@@ -29,13 +29,13 @@ class HydratorFactory
      *
      * @throws InvalidGeneratedClassesDirectoryException
      */
-    public function getHydratorClass() : string
+    public function getHydratorClass(bool $force = false) : string
     {
         $inflector         = $this->configuration->getClassNameInflector();
         $realClassName     = $inflector->getUserClassName($this->configuration->getHydratedClassName());
         $hydratorClassName = $inflector->getGeneratedClassName($realClassName, ['factory' => static::class]);
 
-        if (! class_exists($hydratorClassName) && $this->configuration->doesAutoGenerateProxies()) {
+        if (($force || !class_exists($hydratorClassName)) && $this->configuration->doesAutoGenerateProxies()) {
             $generator     = $this->configuration->getHydratorGenerator();
             $originalClass = new ReflectionClass($realClassName);
             $generatedAst  = $generator->generate($originalClass);
