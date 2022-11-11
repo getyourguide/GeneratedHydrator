@@ -19,8 +19,8 @@
         }
     ],
     "require": {
-        "php":                           "^7.1",
-        "nikic/php-parser":              "^4.2.1",
+        "php": "^7.4 || ^8.1",
+        "nikic/php-parser": "^4.2.1",
         "ocramius/code-generator-utils": "^1.0.0"
     },
     "autoload": {
